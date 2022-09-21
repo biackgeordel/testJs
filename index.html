@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>test</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        display: flex;
+        width: 500px;
+        height: 250px;
+        margin: 15rem auto;
+        overflow: hidden;
+      }
+      button {
+        display: block;
+        flex: 0 0 50px;
+        background: #2c3e50;
+        opacity: 0.8;
+        font-size: 2rem;
+        color: white;
+        z-index: 1;
+        height: 250px;
+        border: 0;
+        transition: background 0.5s;
+      }
+      button:hover {
+        background: #34495e;
+        cursor: pointer;
+      }
+      .container-img {
+        flex: 1 1 auto;
+        height: 250px;
+        position: relative;
+        overflow: hidden;
+        background: #ecf0f1;
+      }
+      .item-img {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 250px;
+      }
+      .container .item-img:nth-child(3) {
+        transform: translateX(400px);
+      }
+      .container .item-img:nth-child(2) {
+        transform: translateX(400px);
+      }
+
+      img {
+        width: 100%;
+        display: block;
+        height: 250px;
+        /* object-fit: contain; */
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <button>-</button>
+      <div class="container-img">
+        <div class="item-img"><img src="./images/bloc-6.jpeg" alt="" /></div>
+        <div class="item-img"><img src="./images/bloc-8.jpeg" alt="" /></div>
+        <div class="item-img">
+          <img src="./images/bloc-11.jpeg" alt="" />
+        </div>
+      </div>
+      <button>+</button>
+    </div>
+    <script type="text/javascript">
+      const div = document.querySelector(".container");
+      // div.style.overflow = "hidden";
+      let depart = 0;
+      const img = document.querySelectorAll(".item-img");
+      div.addEventListener("click", (event) => {
+        let test = event.target.textContent;
+        if (test === "+") {
+          if (depart < img.length - 1) {
+            console.log(img[depart]);
+            img[depart].style.transform = "translateX(-400px)";
+            img[depart].style.transition = "transform 0.5s ease-in";
+            depart++;
+            img[depart].style.transform = "translateX(0px)";
+            img[depart].style.transition = "transform 0.5s ease-in";
+            console.log("remplace:", img[depart]);
+          }
+        } else if (test === "-") {
+          console.log("apres");
+          if (depart !== 0) {
+            img[depart].style.transform = "translateX(400px)";
+            img[depart].style.transition = "transform 0.5s ease-in";
+            depart--;
+            img[depart].style.transform = "translateX(0px)";
+            img[depart].style.transition = "transform 0.5s ease-in";
+            console.log("remplace:", img[depart]);
+          } else {
+            console.log("depart apres:", depart);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
